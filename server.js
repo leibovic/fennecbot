@@ -65,4 +65,9 @@ bot.addListener("message", function(from, to, message) {
     bot.say(to, "https://wiki.mozilla.org/Mobile/Fennec/Android");
     return;
   }
+
+  if (message.indexOf("source") > -1) {
+    bot.say(to, "https://github.com/leibovic/fennecbot");
+    return;
+  }
 });

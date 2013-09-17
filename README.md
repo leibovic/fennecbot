@@ -1,7 +1,7 @@
 fennecbot
 =========
 
-Friendly robot to help Firefox for Android developers in #mobile.
+Friendly robot to help Firefox for Android developers in #mobile on irc.mozilla.org.
 
 To install / run:
 
@@ -9,3 +9,5 @@ To install / run:
 * cd fennecbot
 * npm install
 * node server.js
+
+To be polite, please create your own private IRC channel for testing.

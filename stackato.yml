@@ -1,0 +1,6 @@
+name: fennecbot
+framework:
+  type: node
+mem: 128M
+ignores:
+  - .git

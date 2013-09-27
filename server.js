@@ -70,4 +70,9 @@ bot.addListener("message", function(from, to, message) {
     bot.say(to, "https://github.com/leibovic/fennecbot");
     return;
   }
+
+  if (message.indexOf("devices") > -1) {
+    bot.say(to, "https://wiki.mozilla.org/Mobile/Fennec/DeviceList");
+    return;
+  }
 });

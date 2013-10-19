@@ -8,7 +8,9 @@ if (module.parent) {
 }
 
 var bot = new irc.Client(config.server, config.botName, {
-  channels: config.channels
+  channels: config.channels,
+  port: config.port,
+  secure: config.secure,
 });
 
 var recentNotes;

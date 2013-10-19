@@ -1,0 +1,7 @@
+{
+	"channels": ["#mobile"],
+	"server": "irc.mozilla.org",
+	"botName": "fennecbot",
+	"port": "6697",
+	"secure": "true"
+}

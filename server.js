@@ -1,7 +1,7 @@
 var bz = require("bz"),
     irc = require("irc"),
     https = require('https'),
-    notes = require("notes");
+    notes = require("./notes");
 
 if (module.parent) {
   return;

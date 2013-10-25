@@ -1,7 +1,8 @@
 var bz = require("bz"),
     irc = require("irc"),
-    https = require('https'),
+    https = require("https"),
     notes = require("./notes");
+    config = require("./config");
 
 if (module.parent) {
   return;
@@ -13,7 +14,6 @@ var bot = new irc.Client(config.server, config.botName, {
   secure: config.secure,
 });
 
-var recentNotes;
 var bugzilla = bz.createClient();
 
 // Finds a bug that matches the search term, and says it to the person who asked about it.
@@ -60,7 +60,7 @@ bot.addListener("message", function(from, to, message) {
   }
 
   if (message.indexOf("notes") > -1) {
-    recentNotes = notes.recent(from, to);
+    var recentNotes = notes.recent(from, to);
     bot.say(to, recentNotes);
     return;
   }

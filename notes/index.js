@@ -1,4 +1,5 @@
-config = require("./config");
+var MONTH = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]; //Array to convert month num to shorthand
+var MEETINGDAY = 3; //Represents day of week of meetings
 
 function getRecent(from, to) {
 
@@ -14,20 +15,6 @@ function getPath() {
   var prev = new Date();
   var path;
   var monthShort;
-  var MEETINGDAY = 3; //Constant representing day of week of meetings
-  var MONTH = new Array(); //Array to convert month num to shorthand
-  MONTH[0]="Jan";
-  MONTH[1]="Feb";
-  MONTH[2]="Mar";
-  MONTH[3]="Apr";
-  MONTH[4]="May";
-  MONTH[5]="Jun";
-  MONTH[6]="Jul";
-  MONTH[7]="Aug";
-  MONTH[8]="Sep";
-  MONTH[9]="Oct";
-  MONTH[10]="Nov";
-  MONTH[11]="Dec";
 
   // Check if today is is a Wednesday
   if (todayDate.getDay() === MEETINGDAY) {
@@ -64,27 +51,27 @@ function getPrevDay(date) {
 // TODO
 //Helper function to check if a link actually exists
 function testLink() {
-  // var options = {
-  //   hostname: 'wiki.mozilla.org',
-  //   port: 443,
-  //   path: '/Mobile/Notes',
-  //   method: 'GET'
-  // };
+  var options = {
+    hostname: 'wiki.mozilla.org',
+    port: 443,
+    path: '/Mobile/Notes',
+    method: 'GET'
+  };
 
-  // var req = https.get(options, function(res) {
-  //   console.log("statusCode: ", res.statusCode);
-  //   console.log("headers: ", res.headers);
+  var req = https.get(options, function(res) {
+    console.log("statusCode: ", res.statusCode);
+    console.log("headers: ", res.headers);
 
-  //   res.on('data', function(chunk) {
-  //     var message = from + ": Latest meeting notes: https://wiki.mozilla.org/Mobile/Notes/" + path;
-  //     bot.say(to, message);
-  //   });
-  // });
-  // req.end();
+    res.on('data', function(chunk) {
+      var message = from + ": Latest meeting notes: https://wiki.mozilla.org/Mobile/Notes/" + path;
+      bot.say(to, message);
+    });
+  });
+  req.end();
 
-  // req.on('error', function(e) {
-  //   console.error(e);
-  // });
+  req.on('error', function(e) {
+    console.error(e);
+  });
 }
 
 exports.recent = function(from, to) {

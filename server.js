@@ -1,14 +1,17 @@
 var bz = require("bz"),
-    irc = require("irc");
+    irc = require("irc"),
+    https = require("https"),
+    notes = require("./notes");
+    config = require("./config");
 
 if (module.parent) {
   return;
 }
 
-var bot = new irc.Client("irc.mozilla.org", "fennecbot", {
-  channels: ["#mobile"],
-  secure: true,
-  port: 6697
+var bot = new irc.Client(config.server, config.botName, {
+  channels: config.channels,
+  port: config.port,
+  secure: config.secure,
 });
 
 var bugzilla = bz.createClient();
@@ -57,7 +60,8 @@ bot.addListener("message", function(from, to, message) {
   }
 
   if (message.indexOf("notes") > -1) {
-    bot.say(to, "https://wiki.mozilla.org/Mobile/Notes");
+    var recentNotes = notes.recent(from, to);
+    bot.say(to, recentNotes);
     return;
   }
 

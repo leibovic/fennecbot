@@ -19,7 +19,7 @@ function getPath() {
   // Check if today is is a Wednesday
   if (todayDate.getDay() === MEETINGDAY) {
     monthShort = MONTH[todayDate.getMonth()];
-    path = todayDate.getDate() + "-" + monthShort + "-" + todayDate.getFullYear();
+    path = getDate(todayDate) + "-" + monthShort + "-" + todayDate.getFullYear();
     return path;
   }
 
@@ -30,9 +30,18 @@ function getPath() {
     }
   }
   monthShort = MONTH[prev.getMonth()];
-  path = prev.getDate() + "-" + monthShort + "-" + prev.getFullYear();
+  path = getDate(prev) + "-" + monthShort + "-" + prev.getFullYear();
 
   return path;
+}
+
+// Formats the date to prefix single-digit dates with a "0"
+function getDate(date) {
+  var day = date.getDate();
+  if (day < 10) {
+    return  "0" + day;
+  }
+  return day;
 }
 
 // Properly formats the date to be an object (instead of the UTC string of numbers)

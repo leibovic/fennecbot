@@ -39,7 +39,7 @@ bot.addListener("message", function(from, to, message) {
   if (message.indexOf(bot.nick) !== 0) {
     return;
   }
-  
+
   if (message.indexOf("tracking bug") > -1) {
     findBug(from, to, "blocking-fennec:+ @nobody");
     return;
@@ -80,6 +80,10 @@ bot.addListener("message", function(from, to, message) {
     bot.say(to, "https://wiki.mozilla.org/Mobile/Fennec/DeviceList");
     return;
   }
+});
+
+bot.addListener("error", function(message) {
+  console.log("server error:", message);
 });
 
 tabletTuesday.start(bot, config.channels);

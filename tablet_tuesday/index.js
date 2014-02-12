@@ -31,8 +31,12 @@ function start(bot, channels) {
 }
 
 function startTabletTuesday() {
+  // Make a ranom interval between 120 and 240 minutes.
+  var max = 240;
+  var min = 120;
+  var repeatInterval = Math.random() * (max - min) + min;
   repeat(sayTabletTuesday)
-    .every(1, "hour")
+    .every(repeatInterval, "minutes")
     .for(24, "hours")
     .start.now()
     .then(function () {

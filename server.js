@@ -34,6 +34,24 @@ function findBug(from, to, search) {
     bot.say(to, message);
   });
 }
+var pings={};
+
+// Listener for the autopinger
+bot.addListener("join",function(channel,who){
+  who = who.toLowerCase();
+  if (pings[who]) {
+   var to = channel;
+   if (pings[who].length > 5){
+     to = who; // Avoid spam, PM if there are a lot of  pings
+   }
+   for (i in pings[who]) {
+    var tempto = pings[who][i].silent ? who : to; // For messages marked "silent"
+    bot.say(tempto, who + ": " + pings[who][i].from + " said " + pings[who][i].message)
+   }
+   delete pings[who];
+  }
+});
+
 
 bot.addListener("message", function(from, to, message) {
   if (message.indexOf(bot.nick) !== 0) {
@@ -78,6 +96,19 @@ bot.addListener("message", function(from, to, message) {
 
   if (message.indexOf("devices") > -1) {
     bot.say(to, "https://wiki.mozilla.org/Mobile/Fennec/DeviceList");
+    return;
+  }
+  if (message.indexOf('ping ') > -1) {
+    try {
+      var command = message.match(/(ping)(.*)/)[2].trim().match(/([^ ]*) (.*)/);
+      pingee = command[1].toLowerCase();
+      if (!pings[pingee]) {
+        pings[pingee] = [];
+      }
+      pings[pingee].push({"from": from, "message": command[2], "silent": (message.indexOf("silentping") > -1)});
+    } catch(e) {
+      bot.say(to,"Please specify a nick and a message")
+    }
     return;
   }
 });

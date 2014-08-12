@@ -112,6 +112,8 @@ bot.addListener("message", function(from, to, message) {
     }
     return;
   }
+
+  bot.say(to, "Sorry, I don't know what you're talking about. Patches welcome! https://github.com/leibovic/fennecbot");
 });
 
 bot.addListener("error", function(message) {

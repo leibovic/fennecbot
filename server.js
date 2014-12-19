@@ -113,6 +113,19 @@ bot.addListener("message", function(from, to, message) {
     return;
   }
 
+  if (message.indexOf("coffee") > -1) {
+    bot.say(to, from + ": At your service!");
+    bot.say(to, "         ,-\"-.");
+    bot.say(to, "       _r-----i");
+    bot.say(to, "       \\      |-.");
+    bot.say(to, "        |     | |");
+    bot.say(to, "        |     | |");
+    bot.say(to, "        |     |'");
+    bot.say(to, "        (=====) ");
+    bot.say(to, "");
+    return;
+  }
+
   bot.say(to, from + ": Sorry, I don't know what you're talking about. Patches welcome! https://github.com/leibovic/fennecbot");
 });
 

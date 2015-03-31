@@ -3,6 +3,7 @@ var bz = require("bz"),
     https = require("https"),
     notes = require("./notes"),
     tabletTuesday = require("./tablet_tuesday");
+    insults = require('./insults');
     config = require("./config");
 
 if (module.parent) {
@@ -114,19 +115,11 @@ bot.addListener("message", function(from, to, message) {
   }
 
   if (message.indexOf("coffee") > -1) {
-    bot.say(to, from + ": At your service!");
-    bot.say(to, "         ,-\"-.");
-    bot.say(to, "       _r-----i");
-    bot.say(to, "       \\      |-.");
-    bot.say(to, "        |     | |");
-    bot.say(to, "        |     | |");
-    bot.say(to, "        |     |'");
-    bot.say(to, "        (=====) ");
-    bot.say(to, "");
+    bot.say(to, from + ": ☕");
     return;
   }
 
-  bot.say(to, from + ": Sorry, I don't know what you're talking about. Patches welcome! https://github.com/leibovic/fennecbot");
+  insults.say(bot, to, from);
 });
 
 bot.addListener("error", function(message) {

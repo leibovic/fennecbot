@@ -13,7 +13,7 @@ const INSULT_LIST = [
 ];
 
 function pickInsult() {
-  return INSULT_LIST[Math.round(Math.random() * INSULT_LIST.length)];
+  return INSULT_LIST[Math.round(Math.random() * INSULT_LIST.length) - 1];
 }
 
 module.exports.say = function(bot, to, from) {

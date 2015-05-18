@@ -9,7 +9,7 @@
     "bz": "*",
     "irc" : "*",
     "repeat": "0.0.*",
-    "node-slack": "*"
+    "slack-client": "*"
   },
   "engines": {
     "node": "*"

@@ -19,3 +19,5 @@ function pickInsult() {
 module.exports.say = function(bot, to, from) {
   bot.say(to, from + ": " + pickInsult());
 }
+
+module.exports.pickInsult = pickInsult;

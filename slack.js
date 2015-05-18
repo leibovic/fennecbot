@@ -1,5 +1,6 @@
 var Slack = require('slack-client'),
-    config = require("./slack-config");
+    config = require("./slack-config"),
+    insults = require('./insults');
 
 var slack = new Slack(config.token, true, true);
 
@@ -15,7 +16,7 @@ slack.on('message', function(message) {
     return;
   }
 
-  var response = user.name + ": Hi!";
+  var response = user.name + ": " + insults.pickInsult();
   channel.send(response);
   return console.log("@" + slack.self.name + " responded with \"" + response + "\"");
 });

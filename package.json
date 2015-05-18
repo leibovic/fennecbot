@@ -8,7 +8,8 @@
   "dependencies": {
     "bz": "*",
     "irc" : "*",
-    "repeat": "0.0.*"
+    "repeat": "0.0.*",
+    "node-slack": "*"
   },
   "engines": {
     "node": "*"

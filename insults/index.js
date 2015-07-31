@@ -1,3 +1,9 @@
+var format = require('util').format;
+
+// Somewhere around here is when we started on the new non-XUL Fennec
+var fennecStartDate = new Date('9/1/2011');
+var yearsSince = Math.round((new Date().getTime() - fennecStartDate.getTime()) / 1000 / 60 / 60 / 24 / 365);
+
 const INSULT_LIST = [
   "Why do we let you work here?",
   "Software is hard. Especially for you.",
@@ -9,7 +15,18 @@ const INSULT_LIST = [
   "Yes?",
   "Sure, why not.",
   "Assign it to mfinkle",
-  "Did you push it to Try?"
+  "Ask blassey",
+  "Did you push it to Try?",
+  "No idea.",
+  "Don't care.",
+  "You're the best!",
+  "undefined",
+  "null",
+  "NaN",
+  "You're muted.",
+  "Sorry, you voiped out there.",
+  "Can you please mute?",
+  format('How do we still have this problem after %d years?', yearsSince)
 ];
 
 function pickInsult() {
@@ -21,3 +38,4 @@ module.exports.say = function(bot, to, from) {
 }
 
 module.exports.pickInsult = pickInsult;
+

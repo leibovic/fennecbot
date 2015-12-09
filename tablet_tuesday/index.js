@@ -18,10 +18,17 @@ function start(bot, channels) {
 
   now = new Date();
   millisUntilTuesday = getMillisUntilDayOfWeek(TUESDAY, now);
-  console.log(LOGTAG, "Initial start on",
-      new Date(now.getTime() + millisUntilTuesday));
 
-  // TODO: Compensate for starting ON Tues (i.e. don't wait until next Tues).
+  if (now.getDay() == TUESDAY) {
+    console.log(LOGTAG, "Initial start on",
+        new Date(now.getTime() + 60000));
+
+    setTimeout(startTabletTuesday, 60000);
+  }
+  else {
+    console.log(LOGTAG, "Initial start on",
+        new Date(now.getTime() + millisUntilTuesday));
+  }
   repeat(startTabletTuesday)
     .every(24 * 7, "hours")
     .start.in(millisUntilTuesday, "ms")
@@ -30,14 +37,28 @@ function start(bot, channels) {
     });
 }
 
+function timeTillTomorrow() {
+  var now = new Date();
+  var tomorrow = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1,
+    0 /* hours */,
+    0 /* minutes */,
+    0 /* seconds */,
+    0 /* millis */);
+  return tomorrow.getTime() - now.getTime();
+}
+
 function startTabletTuesday() {
   // Make a random interval between 120 and 240 minutes (2 and 4 hours).
   var max = 240;
   var min = 120;
   var repeatInterval = Math.random() * (max - min) + min;
+  var timeLeft = timeTillTomorrow();
   repeat(sayTabletTuesday)
     .every(repeatInterval, "minutes")
-    .for(24, "hours")
+    .for(timeLeft, "ms")
     .start.now()
     .then(function () {
       log("Fin");

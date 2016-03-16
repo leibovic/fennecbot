@@ -2,7 +2,6 @@ var bz = require("bz"),
     irc = require("irc"),
     https = require("https"),
     notes = require("./notes"),
-    tabletTuesday = require("./tablet_tuesday");
     insults = require('./insults');
     config = require("./config");
 
@@ -125,5 +124,3 @@ bot.addListener("message", function(from, to, message) {
 bot.addListener("error", function(message) {
   console.log("server error:", message);
 });
-
-tabletTuesday.start(bot, config.channels);
